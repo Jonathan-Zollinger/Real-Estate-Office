@@ -8,7 +8,6 @@ public class Property {
         streetAddress = null;
         zip = null;
     }
-
     public Property(String StreetAddress, String zip){
         this.streetAddress = StreetAddress;
         this.zip = zip;
@@ -18,15 +17,12 @@ public class Property {
     public String getStreetAddress() {
         return streetAddress;
     }
-
     public String getZip() {
         return zip;
     }
-
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
-
     public void setZip(String zip) {
         this.zip = zip;
     }
