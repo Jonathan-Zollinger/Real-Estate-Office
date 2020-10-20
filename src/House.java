@@ -6,6 +6,7 @@ public class House extends Residential{
     public House(){
         yardAcres = 0;
     }
+
     //methods
     public double getYardAcres(){
         return yardAcres;

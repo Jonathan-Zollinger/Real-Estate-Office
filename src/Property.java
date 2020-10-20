@@ -5,8 +5,8 @@ public class Property {
 
     //constructors
     public Property(){
-        streetAddress = null;
-        zip = null;
+        streetAddress = "";
+        zip = "";
     }
     public Property(String StreetAddress, String zip){
         this.streetAddress = StreetAddress;
