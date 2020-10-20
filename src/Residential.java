@@ -1,7 +1,7 @@
 public class Residential extends Property{
     //values
-    int bedCount, bathCount;
-    double sqFootage;
+    private int bedCount, bathCount;
+    private double sqFootage;
 
     //constructors
     public Residential() {

@@ -1,6 +1,6 @@
 public class House extends Residential{
     //values
-    double yardAcres;
+    private double yardAcres;
 
     //constructors
     public House(){
