@@ -1,4 +1,4 @@
-public class Residential extends Property{
+public abstract class Residential extends Property{
     //values
     private int bedCount, bathCount;
     private double sqFootage;
@@ -27,6 +27,9 @@ public class Residential extends Property{
         this.bathCount  = 0;
         this.sqFootage  = sqFootage;
     }
+
+    //abstract methods
+    public abstract double calculateAppraisalPrice();
 
     //methods
     public int getBeds(){

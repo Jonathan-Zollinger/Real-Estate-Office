@@ -19,5 +19,18 @@ public class Condo extends Residential{
     public void setFloorLvl(int floorLvl){
         this.floorLvl = floorLvl;
     }
+    @Override
+    public double calculateAppraisalPrice() {
+        double price;
+        //add $88 per sq ft
+        price = 88 * this.getSize();
+        //add $8K for each bedroom
+        price = price + 8000 * this.getBeds();
+        //add $10K for each bath
+        price = price + 10000 * this.getBaths();
+        //add $5k for each floor above the ground floor. thus floor 2 would be (2-1)*$5000
+        price = price + 5000 * (this.getFloorLvl()-1);
+        return price;
+    }
 
 }//end public class Condo extends Residential

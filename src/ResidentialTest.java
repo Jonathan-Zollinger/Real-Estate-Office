@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 class ResidentialTest {
 
-    private Residential residential = new Residential();
+    private Residential residential = new Condo();
 
     @Test
     void getBeds() {
