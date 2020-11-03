@@ -4,7 +4,12 @@ public class House extends Residential{
 
     //constructors
     public House(){
+        super();
         yardAcres = 0;
+    }
+    public House(String StreetAddress, String zip, int bedCount, int bathCount, double sqFootage,double yardAcres){
+        super(StreetAddress,zip,bedCount,bathCount,sqFootage);
+        this.yardAcres = yardAcres;
     }
 
     //methods
