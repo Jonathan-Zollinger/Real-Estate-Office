@@ -16,18 +16,6 @@ public abstract class Residential extends Property{
         this.bathCount  = bathCount;
         this.sqFootage  = sqFootage;
     }
-
-    public Residential(int bedCount, int bathCount){
-        this.bedCount   = bedCount;
-        this.bathCount  = bathCount;
-        sqFootage       = 0;
-    }
-    public Residential(double sqFootage){
-        this.bedCount   = 0;
-        this.bathCount  = 0;
-        this.sqFootage  = sqFootage;
-    }
-
     //abstract methods
     public abstract double calculateAppraisalPrice();
 
