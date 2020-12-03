@@ -4,7 +4,7 @@ public class REO {
     //values
     private static Scanner sIn = new Scanner(System.in);
     private static final String lines = "----------------------------------------";
-    private static Listings listings;
+    private static Listings listings = new Listings();
     private static String question = "what is the %s of the residence?";
 
 
@@ -116,6 +116,7 @@ public class REO {
                         + house.calculateAppraisalPrice(),true);
                 print("Please enter the List Price for the property:$",false);
                 house.setListPrice(Double.parseDouble(sIn.nextLine()));
+                listings.addListing(house.getStreetAddress(), house);
                 print("\nYou have created a new listing!",true);
                 print(house.toString(),true);
             }//end case 1
@@ -127,6 +128,7 @@ public class REO {
                         + house.calculateAppraisalPrice(),true);
                 print("Please enter the List Price for the property:$",false);
                 condo.setListPrice(Double.parseDouble(sIn.nextLine()));
+                listings.addListing(condo.getStreetAddress(), condo);
                 print("\nYou have created a new listing!",true);
                 print(condo.toString(),true);
             }//end case 2
@@ -134,7 +136,7 @@ public class REO {
     }//end private static void addListing()
 
     private static void addMainListingInfo(Residential residential){
-        String[] variables = {"address","zip code","bedcount","bathcount","square footage"};
+        String[] variables = {"address","zip code","bed Count","bath Count","square footage"};
         String input = "";
         //enter values for the residence that aren't unique to either houses or condos
         for (int i = 0; i < 5; i++){
@@ -151,11 +153,16 @@ public class REO {
     }//end  private static Residential addMainListingInfo(Residential residential)
 
     private static void showListings(){
-        print("selected showListings",true);
+        int n = 0;
+        print("Current Listings for REO:%n",true);
+        for (String key: listings.getListings().keySet()){
+            n ++;
+            print(String.format("Listing No: %d%s",n,listings.getListing(key).toString()),true);
+        }
     }
 
     private static void autoPopulateListings(){
-        int currentSize = listings.getListings().size();
+        //int currentSize = listings.getListings().size();
         House house1 = new House("34 Elm","95129", 3, 2, 2200, .2);
         house1.setListPrice(house1.calculateAppraisalPrice() * 1.1);
         listings.addListing("34 Elm", house1);

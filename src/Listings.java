@@ -39,6 +39,6 @@ public class Listings implements Listable{
     @Override
     public void addListing(String address, Residential residential) {
         hashMap.put(address,residential);
-        System.out.printf("added the residence at %s",address);
+        System.out.printf("added the residence at %s%n",address);
     }
 }
