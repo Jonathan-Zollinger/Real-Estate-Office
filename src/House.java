@@ -43,7 +43,7 @@ public class House extends Residential{
         String headerLines = "\n--------------------------------------------------------------------------------" +
                 "-----------------------\n";
         string += headerLines;
-        string += String.format("Residence Type: House\tAddress: %s\tZip Code:%s",getStreetAddress(),getZip());
+        string += String.format("Residence Type: House\t\tAddress: %s\t\tZip Code:%s",getStreetAddress(),getZip());
         string += headerLines;
         string += String.format("Sq Footage: %f%nBedrooms: %d%nBathrooms: %d%nYard Size (Acres): %f",
                 getSize(),getBeds(),getBaths(),getYardAcres());
