@@ -37,5 +37,20 @@ public class House extends Residential{
 
         return price;
     }
+    public String toString(){
+        String string = "";
+        String lines = "\n----------------------------------------\n";
+        String headerLines = "\n--------------------------------------------------------------------------------" +
+                "-----------------------\n";
+        string += headerLines;
+        string += String.format("Residence Type: House\tAddress: %s\tZip Code:%s",getStreetAddress(),getZip());
+        string += headerLines;
+        string += String.format("Sq Footage: %f%nBedrooms: %d%nBathrooms: %d%nYard Size (Acres): %f",
+                getSize(),getBeds(),getBaths(),getYardAcres());
+        string += lines;
+        string += String.format("Appraisal Price: $%f%nList Price: $%f",calculateAppraisalPrice(),getListPrice());
+        string += lines;
+        return string;
+    }
 
 }//end public class House extends Residential
