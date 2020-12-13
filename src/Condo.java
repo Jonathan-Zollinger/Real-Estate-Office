@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Set;
+
 public class Condo extends Residential{
     //values
     int floorLvl;
@@ -35,18 +38,26 @@ public class Condo extends Residential{
     public String toString(){
         String string = "";
         String lines = "\n----------------------------------------\n";
-        String headerLines = "\n--------------------------------------------------------------------------------" +
-                "-----------------------\n";
+        String headerLines =
+                "\n------------------------------------------------------------------------------------------------\n";
+
         string += headerLines;
         string += String.format(
-                "Residence Type: Condo\t\t\t\tAddress: %s\t\t\t\tZip Code:%s",getStreetAddress(),getZip());
+                "%28s%-32s%24s",
+                "Residence Type: Condo",
+                "     Address: " + getStreetAddress(),
+                "Zip Code:" + getZip());
         string += headerLines;
-        string += String.format("Sq Footage: %f%nBedrooms: %d%nBathrooms: %d%nYard Size (Acres): %d",
-                getSize(),getBeds(),getBaths(),getFloorLvl());
+        string += String.format("%20s%.2f%n%20s%d%n%20s%d%n%20s%d",
+                "Sq Footage: ", getSize(),
+                "Bedrooms: ", getBeds(),
+                "Bathrooms: ", getBaths(),
+                "Floor Levels: ", getFloorLvl());
         string += lines;
-        string += String.format("Appraisal Price: $%f%nList Price: $%f",calculateAppraisalPrice(),getListPrice());
+        string += String.format("%20s$%.2f%n%20s$%.2f",
+                "Appraisal Price: ",calculateAppraisalPrice(),
+                "List Price: ", getListPrice());
         string += lines;
         return string;
     }//end public String toString()
-
 }//end public class Condo extends Residential

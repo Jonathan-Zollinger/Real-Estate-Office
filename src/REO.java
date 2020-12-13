@@ -2,10 +2,17 @@ import java.util.Scanner;
 
 public class REO {
     //values
-    private static Scanner sIn = new Scanner(System.in);
+    private static final Scanner sIn = new Scanner(System.in);
     private static final String lines = "----------------------------------------";
-    private static Listings listings = new Listings();
-    private static String question = "what is the %s of the residence?";
+    private static final String bigLines =
+            "------------------------------------------------------------------------------------------------";
+    private static final Listings listings = new Listings();
+    private static final String question = "what is the %s of the residence?";
+    private static String[] autoBidders= {
+            "Patric Stewart","Walter Koenig","William Shatner","Leonard Nimoy","DeForect Kelley","James Doohan",
+                    "George Takei","Majel Barrett","Nichelle Nichol","Jonathan Frank","Marina Sirtis","Brent Spiner",
+                    "Gates McFadden","Michael Dorn","LeVar Burton","Wil Wheaton","Colm Meaney","Michelle Forbes"
+            };
 
 
     //main (constructor)
@@ -36,7 +43,7 @@ public class REO {
             //Listings
             case 1 -> listingsMenu();
             //Bids
-            case 2 -> bids();
+            case 2 -> bidsMenu();
         }//end switch (Integer.parseInt(response))
     }//end private static void mainMenu()
 
@@ -47,58 +54,35 @@ public class REO {
     private static void listingsMenu(){
         print(formatTitle("Listing Menu"),false);
         //formats the options printout in a single text string
-        String options = String.format("%s%n%s%n%s%n%s%n%n%n%s",
-                "1: Add Listing",
-                "2: Show Listings",
-                "3: Auto Populate Listings (Dev tool)",
-                "ENTER: Exit back to previous menu",
-                "What would you like to do? (1-3):");
-        //ask for the user input, validating their input
-        String response = "";
-        do {
-            print(options,false);
-            response = sIn.nextLine();
-            //if they enter kaput, go back to main
-            if (response.length() == 0){return;}
-        }while(!isValidInt(3,response));
-        //return the choice submitted as an integer
-        switch (Integer.parseInt(response)) {
-            //add a listing
-            case 1 -> addListing();
-            //show listings
-            case 2 -> showListings();
-            //auto populate listings
-            case 3 -> autoPopulateListings();
-        }//end switch (Integer.parseInt(response))
+        while(true) {
+            String options = String.format("%s%n%s%n%s%n%s%n%n%n%s",
+                    "1: Add Listing",
+                    "2: Show Listings",
+                    "3: Auto Populate Listings (Dev tool)",
+                    "ENTER: Exit back to previous menu",
+                    "What would you like to do? (1-3):");
+            //ask for the user input, validating their input
+            String response = "";
+            do {
+                print(options, false);
+                response = sIn.nextLine();
+                //if they enter kaput, go back to main
+                if (response.length() == 0) {
+                    return;
+                }
+            } while (!isValidInt(3, response));
+            //return the choice submitted as an integer
+            switch (Integer.parseInt(response)) {
+                //add a listing
+                case 1 -> addListing();
+                //show listings
+                case 2 -> showListings();
+                //auto populate listings
+                case 3 -> autoPopulateListings();
+            }//end switch (Integer.parseInt(response))
+        }
     }//end private static void listings()
 
-    private static void bids(){
-        print(formatTitle("Listing Menu"),false);
-        //formats the options printout in a single text string
-        String options = String.format("%s%n%s%n%s%n%s%n%n%n%s",
-                "1: Add New Bid",
-                "2: Show Existing Bids",
-                "3: Auto Populate Listings (Dev tool)",
-                "ENTER: Exit back to previous menu",
-                "What would you like to do? (1-3):");
-        //ask for the user input, validating their input
-        String response = "";
-        do {
-            print(options,false);
-            response = sIn.nextLine();
-            //if they enter kaput, go back to main
-            if (response.length() == 0){return;}
-        }while(!isValidInt(3,response));
-        //return the choice submitted as an integer
-        switch (Integer.parseInt(response)) {
-            //add a listing
-            case 1 -> addNewBid();
-            //show listings
-            case 2 -> showExistingBids();
-            //auto populate listings
-            case 3 -> autoPopulateListings();
-        }//end switch (Integer.parseInt(response))
-    }//end private static void bids()
     private static void addListing(){
         String input = "";
         House house = new House();
@@ -135,6 +119,9 @@ public class REO {
         }//end switch (house or condo)
     }//end private static void addListing()
 
+    /**
+     * @param residential is the new listing that we're adding
+     */
     private static void addMainListingInfo(Residential residential){
         String[] variables = {"address","zip code","bed Count","bath Count","square footage"};
         String input = "";
@@ -150,11 +137,14 @@ public class REO {
                 case 4 -> residential.setSize(Double.parseDouble(input));
             }
         }//end for (int i = 0; i < 5; i++)
-    }//end  private static Residential addMainListingInfo(Residential residential)
+    }//end addMainListingInfo(Residential)
 
+    /**
+     * this doesn't actually return anything, it just prints the listings to the console
+     */
     private static void showListings(){
         int n = 0;
-        print("Current Listings for REO:%n",true);
+        print("Current Listings for REO:\n",true);
         for (String key: listings.getListings().keySet()){
             n ++;
             print(String.format("Listing No: %d%s",n,listings.getListing(key).toString()),true);
@@ -189,12 +179,140 @@ public class REO {
         listings.addListing("1220 Apple", house5);
     }
 
-    private static void addNewBid(){
-        print("selected addNewBid",true);
+    /**
+     * prints navigation options, validates response from user as a valid option choice and calls the corresponding
+     * method.
+     */
+    private static void bidsMenu() {
+        print(formatTitle("Bids Menu"), false);
+        //formats the options printout in a single text string
+        while(true) {
+            String options = String.format("%s%n%s%n%s%n%s%n%n%n%s",
+                    "1: Add New Bid",
+                    "2: Show Existing Bids",
+                    "3: Auto Populate Bids (Dev tool)",
+                    "ENTER: Exit back to previous menu",
+                    "What would you like to do? (1-3):");
+            //ask for the user input, validating their input
+            String response = "";
+            do {
+                print(options, false);
+                response = sIn.nextLine();
+                //if they enter kaput, go back to main
+                if (response.length() == 0) {
+                    return;
+                }
+            } while (!isValidInt(3, response));
+            //return the choice submitted as an integer
+            switch (Integer.parseInt(response)) {
+                //add a listing
+                case 1 -> addNewBid();
+                //show listings
+                case 2 -> showExistingBids();
+                //auto populate listings
+                case 3 -> autoBidListings();
+            }//end switch (Integer.parseInt(response))
+        }
+    }//end private static void bids()
+
+    private static void autoBidListings(){
+        for (Residential value : listings.getListings().values()) {
+            int bids = 0;
+            //make 4 random authored and priced bids
+            while(bids < Math.random()*8) {
+                value.newBid(
+                        //select random bidder
+                        autoBidders[(int) (Math.random() * (autoBidders.length - 1))],
+                        //the bid will be a random number ranging from +-10% of the appraisal price
+                        (Math.random()*.20-.10)*value.calculateAppraisalPrice()+value.calculateAppraisalPrice()
+                );//end new bid
+                bids ++;
+            }//end while bids < 4
+        }//end all values loop
+    }//end autobid
+
+    /**
+     * adds a new bid to an existing property
+     */
+    private static void addNewBid() {
+        //print bid opportunities menu
+        print(String.format("Current Listings for REO:\n\nNo.\t%-30s(bids)\n%s", "Property", lines), true);
+        String response = "";
+        while (true) {//keep adding bids until they enter nothing (currently line 244)
+            do {
+                int i = 1;
+                for (String key : listings.getListings().keySet()) {
+                    print(String.format("%d:\t%-30s(%d)", i, key, listings.getListing(key).getBidCount()), true);
+                    i++;
+                }
+                print(String.format("%s\n\n%s",
+                        "ENTER: Exit back to previous menu",
+                        "For which property would you like to add a bid?: "), false);
+                response = sIn.nextLine();
+                //if they enter kaput, go back to main
+                if (response.length() == 0) {
+                    return;
+                }
+            } while (!isValidInt(listings.getListingCount(), response));
+
+            int choice = Integer.parseInt(response);
+            //cycle through properties until we get the selected property, call that bidProperty
+            int i = 1;
+            Residential bidProperty = null;
+            for (String key : listings.getListings().keySet()) {
+                if (i == choice) {
+                    bidProperty = listings.getListing(key);
+                    //display property information before asking for bid info
+                    print(listings.getListing(key).toString(),true);
+                    print(listings.getListing(key).getBidsPrintout(),true);
+                    break;
+                }
+                i++;
+            }//end for (String key : listings.getListings().keySet())
+
+            //ask for the name of the bidder
+            print("Please enter the name of the bidder: ", false);
+            String bidder = sIn.nextLine();
+            //ask for their bid
+            print("Please enter the new bid: $", false);
+            assert bidProperty != null;
+            bidProperty.newBid(bidder, Double.parseDouble(sIn.nextLine())); //it's assumed the user will input valid data
+            print("New bid for property '" + bidProperty.getStreetAddress() + "' added", true);
+        }
     }
 
     private static void showExistingBids(){
-        print("selected showExistingBids",true);
+        //print bid opportunities menu
+        print(String.format("Current Listings for REO:\n\nNo.\t%-30s(bids)\n%s", "Property", lines), true);
+        String response = "";
+        do {
+            int i = 1;
+            for (String key : listings.getListings().keySet()) {
+                print(String.format("%d:\t%-30s(%d)", i, key, listings.getListing(key).getBidCount()), true);
+                i++;
+            }
+            print(String.format("%s\n\n%s",
+                    "ENTER: Exit back to previous menu",
+                    "For which property would you like to see the current bids?: "), false);
+            response = sIn.nextLine();
+            //if they enter kaput, go back to main
+            if (response.length() == 0) {
+                return;
+            }
+        } while (!isValidInt(listings.getListingCount(), response));
+        int choice = Integer.parseInt(response);
+
+        //cycle through properties until we get the selected property, call that bidProperty
+        int i = 1;
+        Residential bidProperty = null;
+        for (String key : listings.getListings().keySet()) {
+            if (i == choice) {
+                print(listings.getListing(key).toString(),true);
+                print(listings.getListing(key).getBidsPrintout(),true);
+                return;
+            }
+            i++;
+        }//end for (String key : listings.getListings().keySet())
     }
 
     /**
@@ -246,4 +364,6 @@ public class REO {
             return false;
         }
     }
+
+
 }//end public class REO

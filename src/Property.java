@@ -29,35 +29,35 @@ public abstract class Property {
     public abstract double calculateAppraisalPrice();
 
     //methods
-    public String getStreetAddress() {
+    public String   getStreetAddress() {
         return streetAddress;
     }
 
-    public String getZip() {
+    public String   getZip() {
         return zip;
     }
 
-    public void setStreetAddress(String streetAddress) {
+    public void     setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
 
-    public void setZip(String zip) {
+    public void     setZip(String zip) {
         this.zip = zip;
     }
 
-    public double getAppraisalPrice() {
+    public double   getAppraisalPrice() {
         return appraisalPrice;
     }
 
-    public double getListPrice() {
+    public double   getListPrice() {
         return listPrice;
     }
 
-    protected void setAppraisalPrice(double appraisalPrice) {
+    protected void  setAppraisalPrice(double appraisalPrice) {
         this.appraisalPrice = appraisalPrice;
     }
 
-    public void setListPrice(double listPrice) {
+    public void     setListPrice(double listPrice) {
         this.listPrice = listPrice;
     }
 

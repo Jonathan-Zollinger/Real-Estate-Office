@@ -1,25 +1,30 @@
-public class House extends Residential{
+import java.util.HashMap;
+import java.util.Set;
+
+public class House extends Residential {
     //values
     private double yardAcres;
 
     //constructors
-    public House(){
+    public House() {
         super();
         yardAcres = 0;
     }
 
-    public House(String StreetAddress, String zip, int bedCount, int bathCount, double sqFootage,double yardAcres){
-        super(StreetAddress,zip,bedCount,bathCount,sqFootage);
+    public House(String StreetAddress, String zip, int bedCount, int bathCount, double sqFootage, double yardAcres) {
+        super(StreetAddress, zip, bedCount, bathCount, sqFootage);
         this.yardAcres = yardAcres;
     }
 
     //methods
-    public double getYardAcres(){
+    public double getYardAcres() {
         return yardAcres;
     }
-    public void setYardAcres(double yardAcres){
+
+    public void setYardAcres(double yardAcres) {
         this.yardAcres = yardAcres;
     }
+
     @Override
     public double calculateAppraisalPrice() {
         double price;
@@ -37,21 +42,30 @@ public class House extends Residential{
 
         return price;
     }
-    public String toString(){
+
+    public String toString() {
         String string = "";
         String lines = "\n----------------------------------------\n";
-        String headerLines = "\n--------------------------------------------------------------------------------" +
-                "-----------------------\n";
+        String headerLines =
+                "\n------------------------------------------------------------------------------------------------\n";
         string += headerLines;
         string += String.format(
-                "Residence Type: House\t\t\t\tAddress: %s\t\t\t\tZip Code:%s",getStreetAddress(),getZip());
+                "%28s%-32s%24s",
+                "Residence Type: House",
+                "     Address: " + getStreetAddress(),
+                "Zip Code:" + getZip());
         string += headerLines;
-        string += String.format("Sq Footage: %f%nBedrooms: %d%nBathrooms: %d%nYard Size (Acres): %f",
-                getSize(),getBeds(),getBaths(),getYardAcres());
+        string += String.format("%20s%.2f%n%20s%d%n%20s%d%n%20s%.2f",
+                "Sq Footage: ",getSize(),
+                "Bedrooms: ",getBeds(),
+                "Bathrooms: ", getBaths(),
+                "Yard Size (Acres): ", getYardAcres());
         string += lines;
-        string += String.format("Appraisal Price: $%f%nList Price: $%f",calculateAppraisalPrice(),getListPrice());
+        string += String.format("%20s$%.2f%n%20s$%.2f",
+                "Appraisal Price: ",calculateAppraisalPrice(),
+                "List Price: ", getListPrice());
         string += lines;
         return string;
-    }
 
-}//end public class House extends Residential
+    }//end public class House extends Residential
+}
